@@ -33,6 +33,12 @@ namespace IA
             return this.nombre;
         }
 
+        //get del tipo
+        public String getTipo()
+        {
+            return this.tipo;
+        }
+
         //get del campo ataque
         public int getAtaque()
         {

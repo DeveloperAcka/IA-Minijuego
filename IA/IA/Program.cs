@@ -86,9 +86,6 @@ namespace IA
 
                     if (primerJugador == "maquina")
                     {
-
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //propuesta Randómica de la maquina
                         String prioridad = "MAQUINA";
@@ -98,59 +95,29 @@ namespace IA
                         imprimirEleccionCarta("MAQUINA", maquina[movi]);
 
                         //guardo en un objeto llamado seleccion usuario, el objeto antes de borrarlo para compararlo
-                        carta SelUs = usuario[movi];
+                        carta SelMa = maquina[movi];
 
                         //eliminar la carta del mazo 
-                        //eliminamos las cartas moviendo los objetos
                         maquina[movi] = null;
                         Console.ReadKey();
                         //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
 
 
-
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //respuesta del usuario
                         Console.WriteLine("\nTURNO DEL USUARIO");
                         Console.ReadKey();
-                        bool selec;
-                        selec = false;
-
-                        while (selec == false)
-                        {
-                            int cont = 0;
-                            //imprimir el mazo del usuario
-                            Console.WriteLine("\n\nEscoja una carta  : ");
-                            imprimirMazo(usuario, "USUARIO");
-                           
-                            //seleccion de carta de respuesta
-                            int mov = Convert.ToInt32(Console.ReadLine());
-                            if (usuario[mov] != null)
-                            {
-                                selec = true;
-                                movi = mov;
-                            }
-                            else
-                                Console.WriteLine("Escoja un numero de carta valido");
-                        }
-
+                        movi = seleccionarCartaUsuario(usuario);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardo en un objeto llamado seleccion usuario, el objeto antes de borrarlo para compararlo
-                        carta SelMa = maquina[movi];
+                        carta SelUs = usuario[movi];
+
                         //eliminar la carta del mazo 
                         usuario[movi] = null;
                         //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
+ 
 
-
-
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
@@ -158,90 +125,50 @@ namespace IA
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
                         //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                     }
                     else
                     {
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //PROPUESTA DEL USUARIO
                         String prioridad = "USUARIO";
                         int opc = mostrarEleccionUsuario();
                         Console.ReadLine();
                         imprimirElección("USUARIO", opc);
-
-                        bool selec = false;
                         int movi = 0;
-
-                        while (selec == false)
-                        {
-                            int cont = 0;
-                            //imprimir el mazo del usuario
-                            Console.WriteLine("\n\nEscoja una carta : ");
-                            imprimirMazo(usuario, "USUARIO");
-
-                            //seleccion de carta de propuesta
-                            int mov = Convert.ToInt32(Console.ReadLine());
-
-                            if (usuario[mov] != null)
-                            {
-                                selec = true;
-                                movi = mov;
-                            }
-                            else
-                                Console.WriteLine("Escoja un numero de carta valido");
-                        }
-
+                        movi = seleccionarCartaUsuario(usuario);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardo en un objeto llamado seleccion usuario, el objeto antes de borrarlo para compararlo
                         carta SelUs = usuario[movi];
 
-
                         //eliminar la carta del mazo 
-                        //eliminamos las cartas moviendo los objetos
-
                         usuario[movi] = null;
-
-
-
-                        Console.ReadKey();
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
 
 
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //respuesta de la máquina
-
                         Console.WriteLine("\nTURNO DE LA MÁQUINA");
                         Console.ReadKey();
-                        selec = false;
+                        bool selec = false;
                         movi = seleccionarCartaMaquina(maquina);
                         imprimirEleccionCarta("MAQUINA", maquina[movi]);
 
                         //guardo en un objeto llamado seleccion de la maquina, el objeto antes de borrarlo para compararlo
                         carta SelMa = maquina[movi];
 
-
                         //eliminar la carta del mazo 
-                        //eliminamos las cartas moviendo los objetos
-
                         maquina[movi] = null;
+                        //***********************************************************************************************************************************************************
 
 
+                        //***********************************************************************************************************************************************************
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
                         int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario, prioridad);
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
+                        //************************************************************************************************************************************************************
                     }
 
                 }
@@ -257,19 +184,10 @@ namespace IA
                     if (segundoJugador == "maquina")
                     {
                         //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //propuesta de la máquina
                         String prioridad = "MAQUINA";
-                        Console.WriteLine("TURNO DE LA MÁQUINA");
-                        
-                        var rnd3 = new Random();
-                        var randomNumber4 = Enumerable.Range(1, 4).OrderBy(x => rnd3.Next()).Take(1).ToList();
-                        int opc = randomNumber4[0];
-                        Console.ReadKey();
+                        int opc = generarPropuestaMaquina(); //selecciona cuál es el criterio de victoria de la ronda
                         imprimirElección("MAQUINA", opc);
-
-                        bool selec = false;
                         int movi = seleccionarCartaMaquina(maquina);
                         imprimirEleccionCarta("MAQUINA", maquina[movi]);
 
@@ -277,65 +195,36 @@ namespace IA
                         carta SelMa = maquina[movi];
 
                         //eliminar la carta del mazo 
-                        //eliminamos las cartas moviendo los objeto
                         maquina[movi] = null;
                         Console.ReadKey();
                         //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
 
 
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //respuesta del usuario
                         Console.WriteLine("\nTURNO DEL USUARIO");
-
-                        selec = false;
-
-
-                        while (selec == false)
-                        {
-                            int cont = 0;
-                            //imprimir el mazo del usuario
-                            Console.WriteLine("\n\nEscoja una carta  : ");
-                            imprimirMazo(usuario, "USUARIO");
-
-                            //seleccion de carta de respuesta
-                            int mov = Convert.ToInt32(Console.ReadLine());
-
-                            if (usuario[mov] != null)
-                            {
-                                selec = true;
-                                movi = mov;
-                            }
-                            else
-                                Console.WriteLine("Escoja un numero de carta valido");
-                        }
-
+                        bool selec = false;
+                        movi = seleccionarCartaUsuario(usuario);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardar el objeto antes de eliminarlo
                         carta SelUs = usuario[movi];
 
                         //eliminar la carta del mazo 
-                        //eliminamos las cartas moviendo los objetos
-
                         usuario[movi] = null;
+                        //***********************************************************************************************************************************************************
 
+
+                        //***********************************************************************************************************************************************************
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
                         int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario, prioridad);
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
-
-
-
+                        //***********************************************************************************************************************************************************
                     }
                     else
                     {
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //Propuesta del usuario
                         String prioridad = "USUARIO";
@@ -344,45 +233,17 @@ namespace IA
 
                         bool selec = false;
                         int movi = 0;
-
-                        while (selec == false)
-                        {
-                            int cont = 0;
-                            //imprimir el mazo del usuario
-                            Console.WriteLine("\n\nEscoja una carta : ");
-                            imprimirMazo(usuario, "USUARIO");
-
-
-                            //seleccion de carta de propuesta
-
-                            int mov = Convert.ToInt32(Console.ReadLine());
-
-                            if (usuario[mov] != null)
-                            {
-                                selec = true;
-                                movi = mov;
-                            }
-                            else
-                                Console.WriteLine("Escoja un numero de carta valido");
-                        }
-
+                        movi = seleccionarCartaUsuario(usuario);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardamos la carta antes de eliminarla
                         carta SelUs = usuario[movi];
 
                         //eliminar la carta del mazo 
-                        //eliminamos las cartas moviendo los objetos
-                       
                          usuario[movi] = null;
-                        Console.ReadKey();
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
 
 
-                        //***********************************************************************************************************************************************************
-                        //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //respuesta de la máquina
                         Console.WriteLine("\nTURNO DE LA MÁQUINA");
@@ -395,43 +256,37 @@ namespace IA
                         //guardo en un objeto llamado seleccion de la maquina, el objeto antes de borrarlo para compararlo
                         carta SelMa = maquina[movi];
 
-
                         //eliminar la carta del mazo 
-                        //eliminamos las cartas moviendo los objetos
-
                         maquina[movi] = null;
+                        //***********************************************************************************************************************************************************
 
 
+                        //***********************************************************************************************************************************************************
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
                         int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario, prioridad);
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
-
+                        //***********************************************************************************************************************************************************
                     }
                 }
 
                 contador = contador + 1;
             }
 
-
             //definir el ganador de la partida
             Console.Clear();
             Console.WriteLine("Resultados de la partida: ");
-
             Console.WriteLine("\n\nPuntuación: ");
             Console.WriteLine("Usuario: ");
             Console.WriteLine(puntosUsuario);
             Console.WriteLine("Máquina: ");
             Console.WriteLine(puntosMaquina);
 
-
-
             if (puntosMaquina > puntosUsuario)
                 Console.WriteLine("\n\nLa máquina ganó la partida");
             else
                 Console.WriteLine("\n\nEl usuario ganó la partida");
-
         }
 
         //función para cargar la biblioteca de cartas y los decks
@@ -824,23 +679,49 @@ namespace IA
             return movi;
         }
 
+        public int seleccionarCartaUsuario(carta[] usuario)
+        {
+            int movi = 0; ;
+            bool selec;
+            selec = false;
+            while (selec == false)
+            {
+                int cont = 0;
+                //imprimir el mazo del usuario
+                Console.WriteLine("\n\nEscoja una carta  : ");
+                imprimirMazo(usuario, "USUARIO");
+
+                //seleccion de carta de respuesta
+                int mov = Convert.ToInt32(Console.ReadLine());
+                if (usuario[mov] != null)
+                {
+                    selec = true;
+                    movi = mov;
+                }
+                else
+                    Console.WriteLine("Escoja un numero de carta valido");
+            }
+            return movi;
+        }
+
         //función que imprime el mazo de cartas
         public void imprimirMazo(carta[] mazo, String player)
         {
             int contador = 0;
             Console.WriteLine("\n\nMazo de: "+player);
-            Console.WriteLine("\n\nNombre ---  ataque - defensa - poder de minado");
+            Console.WriteLine("\n\nNombre - tipo - ataque - defensa - poder de minado");
             foreach (carta aux in mazo)
             {
                 
                 if (aux != null)
                 {
                     String nombre = aux.getNombre();
+                    String tipo = aux.getTipo();
                     int ataque = aux.getAtaque();
                     int defensa = aux.getDefensa();
                     int poderMinado = aux.getPoderMinado();
 
-                    Console.WriteLine(contador+" "+nombre+" "+ataque+" "+defensa+" "+poderMinado);
+                    Console.WriteLine(contador+" "+nombre+" "+tipo+" "+ataque+" "+defensa+" "+poderMinado);
                 }
                 contador = contador + 1;
             }
