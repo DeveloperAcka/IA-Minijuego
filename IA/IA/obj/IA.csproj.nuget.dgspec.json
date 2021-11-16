@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Trabajo diario\\IA 2\\IA\\IA.csproj": {}
+    "C:\\IA-Minijuego\\IA\\IA\\IA.csproj": {}
   },
   "projects": {
-    "D:\\Trabajo diario\\IA 2\\IA\\IA.csproj": {
+    "C:\\IA-Minijuego\\IA\\IA\\IA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Trabajo diario\\IA 2\\IA\\IA.csproj",
+        "projectUniqueName": "C:\\IA-Minijuego\\IA\\IA\\IA.csproj",
         "projectName": "IA",
-        "projectPath": "D:\\Trabajo diario\\IA 2\\IA\\IA.csproj",
+        "projectPath": "C:\\IA-Minijuego\\IA\\IA\\IA.csproj",
         "packagesPath": "C:\\Users\\PROJECT GAMER 03\\.nuget\\packages\\",
-        "outputPath": "D:\\Trabajo diario\\IA 2\\IA\\obj\\",
+        "outputPath": "C:\\IA-Minijuego\\IA\\IA\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

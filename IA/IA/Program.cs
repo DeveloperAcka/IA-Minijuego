@@ -8,26 +8,30 @@ namespace IA
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-            //creación del entorno de interacción
+            //creación del objeto de interacción
             Program P = new Program();
+            P.iniciar();
+        }
 
+        //función de inicialización del juego
+        public void iniciar()
+        {
             //carga de cartas
-            carta[] stock = P.cargarCartas();
+            carta[] stock = cargarCartas();
 
             //creamos el mazo del usuario y lo llenamos
-            carta[] usuario = P.deckUsuario(stock);
+            carta[] usuario = deckUsuario(stock);
 
             //creamos el mazo de la máquina y lo llenamos
-            carta[] maquina = P.deckMaquina(stock);
+            carta[] maquina = deckMaquina(stock);
 
             //imprimir el mazo del jugador
-            P.imprimirMazo(usuario, "USUARIO ");
+            imprimirMazo(usuario, "USUARIO ");
 
             //imprimir el mazo de la maquina
-            P.imprimirMazo(maquina, "MAQUINA ");
+            imprimirMazo(maquina, "MAQUINA ");
 
             //consola
             Console.WriteLine("\nInicia el juego");
@@ -44,20 +48,19 @@ namespace IA
             String segundoJugador = " ";
 
             //Función que contiene algoritmo para asignar mediante moneda los turnos de los jugadores
-            String[] orden = P.caraSello(deseoJugador);
+            String[] orden = caraSello(deseoJugador);
             primerJugador = orden[0];
             segundoJugador = orden[1];
 
             Console.ReadKey();
 
             //Iniciar el juego
-            P.juego(primerJugador, segundoJugador, usuario, maquina);
+            juego(primerJugador, segundoJugador, usuario, maquina);
 
             //Cerrar el juego
             Environment.Exit(0);
         }
 
-       
         //función del juego completo
         public void juego(String primerJugador, String segundoJugador, carta[] usuario, carta[] maquina)
         {
@@ -88,6 +91,7 @@ namespace IA
                         //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //propuesta Randómica de la maquina
+                        String prioridad = "MAQUINA";
                         int opc = generarPropuestaMaquina(); //selecciona cuál es el criterio de victoria de la ronda
                         imprimirElección("MAQUINA", opc);
                         int movi = seleccionarCartaMaquina(maquina);
@@ -150,7 +154,7 @@ namespace IA
                         //***********************************************************************************************************************************************************
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
-                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario);
+                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario, prioridad);
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
                         //***********************************************************************************************************************************************************
@@ -163,6 +167,7 @@ namespace IA
                         //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //PROPUESTA DEL USUARIO
+                        String prioridad = "USUARIO";
                         int opc = mostrarEleccionUsuario();
                         Console.ReadLine();
                         imprimirElección("USUARIO", opc);
@@ -231,7 +236,7 @@ namespace IA
 
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
-                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario);
+                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario, prioridad);
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
                         //***********************************************************************************************************************************************************
@@ -255,6 +260,7 @@ namespace IA
                         //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //propuesta de la máquina
+                        String prioridad = "MAQUINA";
                         Console.WriteLine("TURNO DE LA MÁQUINA");
                         
                         var rnd3 = new Random();
@@ -319,7 +325,7 @@ namespace IA
 
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
-                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario);
+                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario, prioridad);
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
 
@@ -332,7 +338,7 @@ namespace IA
                         //***********************************************************************************************************************************************************
                         //***********************************************************************************************************************************************************
                         //Propuesta del usuario
-                       
+                        String prioridad = "USUARIO";
                         int opc = mostrarEleccionUsuario();
                         imprimirElección("USUARIO", opc);
 
@@ -398,7 +404,7 @@ namespace IA
 
                         //COMPARACIÓN DE QUIÉN GANA
                         //genero un arreglo con lo recibido por el metodo que decide el ganador del duelo
-                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario);
+                        int[] respuesta = ganadorDuelo(opc, SelMa, SelUs, puntosMaquina, puntosUsuario, prioridad);
                         puntosUsuario = respuesta[0];
                         puntosMaquina = respuesta[1];
 
@@ -604,6 +610,7 @@ namespace IA
 
         }
 
+        //funcion que imprime de quién es la entrada
         public void imprimirEntrada(String player)
         {
             Console.ReadKey();
@@ -612,6 +619,7 @@ namespace IA
             Console.WriteLine(player);
         }
 
+        //función que imprime el número de ronda
         public void imprimirRonda(int contador)
         {
             Console.Clear();
@@ -619,6 +627,7 @@ namespace IA
             Console.WriteLine(contador+1);
         }
 
+        //función que imprime la elección de juego
         public void imprimirElección(String player, int opc)
         {
             switch (opc)
@@ -642,7 +651,8 @@ namespace IA
             }
         }
 
-        public int[] ganadorDuelo(int opc, carta SelMa, carta SelUs, int puntosMaquina, int puntosUsuario)
+        //función que asigna e imprime el ganador de un duelo
+        public int[] ganadorDuelo(int opc, carta SelMa, carta SelUs, int puntosMaquina, int puntosUsuario, String prioridad)
         {
             //COMPARACIÓN DE QUIÉN GANA
 
@@ -656,11 +666,20 @@ namespace IA
                         Console.WriteLine("LA MAQUINA");
                         puntosMaquina = puntosMaquina + 1;
                     }
-                    else
+                    else if(SelMa.getAtaque() < SelUs.getAtaque())
                     {
                         Console.WriteLine("EL USUARIO");
                         puntosUsuario = puntosUsuario + 1;
                     }
+                    else if(prioridad == "MAQUINA")
+                    {
+                        puntosMaquina = puntosMaquina + 1;
+                    }
+                    else if(prioridad == "USUARIO")
+                    {
+                        puntosUsuario = puntosUsuario + 1;
+                    }
+                        
 
                     break;
 
@@ -670,9 +689,17 @@ namespace IA
                         Console.WriteLine("LA MAQUINA");
                         puntosMaquina = puntosMaquina + 1;
                     }
-                    else
+                    else if (SelMa.getAtaque() > SelUs.getAtaque())
                     {
                         Console.WriteLine("EL USUARIO");
+                        puntosUsuario = puntosUsuario + 1;
+                    }
+                    else if (prioridad == "MAQUINA")
+                    {
+                        puntosMaquina = puntosMaquina + 1;
+                    }
+                    else if (prioridad == "USUARIO")
+                    {
                         puntosUsuario = puntosUsuario + 1;
                     }
 
@@ -684,11 +711,20 @@ namespace IA
                         Console.WriteLine("LA MAQUINA");
                         puntosMaquina = puntosMaquina + 1;
                     }
-                    else
+                    else if (SelMa.getDefensa() < SelUs.getDefensa())
                     {
                         Console.WriteLine("EL USUARIO");
                         puntosUsuario = puntosUsuario + 1;
                     }
+                    else if (prioridad == "MAQUINA")
+                    {
+                        puntosMaquina = puntosMaquina + 1;
+                    }
+                    else if (prioridad == "USUARIO")
+                    {
+                        puntosUsuario = puntosUsuario + 1;
+                    }
+
 
                     break;
 
@@ -698,15 +734,21 @@ namespace IA
                         Console.WriteLine("LA MAQUINA");
                         puntosMaquina = puntosMaquina + 1;
                     }
-                    else
+                    else if (SelMa.getDefensa() < SelUs.getDefensa())
                     {
                         Console.WriteLine("EL USUARIO");
                         puntosUsuario = puntosUsuario + 1;
                     }
+                    else if (prioridad == "MAQUINA")
+                    {
+                        puntosMaquina = puntosMaquina + 1;
+                    }
+                    else if (prioridad == "USUARIO")
+                    {
+                        puntosUsuario = puntosUsuario + 1;
+                    }
 
                     break;
-
-
 
             }
 
@@ -718,6 +760,7 @@ namespace IA
             return resultado;
         }
 
+        //función que imprime la carta seleccionada
         public void imprimirEleccionCarta(String player, carta obj)
         {
             Console.WriteLine(player + " ha elegido la carta: ");
@@ -731,6 +774,7 @@ namespace IA
             Console.WriteLine(obj.getPoderMinado());
         }
 
+        //función que imprime la elección de juego del usuario
         public int mostrarEleccionUsuario()
         {
             Console.WriteLine("TURNO DEL USUARIO");
@@ -745,6 +789,7 @@ namespace IA
             return opc;
         }
 
+        //función que genera la propuesta de juego de la máquina 
         public int generarPropuestaMaquina()
         {
             int opc=0;
@@ -756,6 +801,7 @@ namespace IA
             return opc;
         }
 
+        //función que selecciona la carta de la máquina
         public int seleccionarCartaMaquina(carta[] maquina)
         {
             int movi = 0;
@@ -778,6 +824,7 @@ namespace IA
             return movi;
         }
 
+        //función que imprime el mazo de cartas
         public void imprimirMazo(carta[] mazo, String player)
         {
             int contador = 0;

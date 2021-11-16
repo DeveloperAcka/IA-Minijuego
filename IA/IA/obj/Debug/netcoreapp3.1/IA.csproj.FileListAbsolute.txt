@@ -40,3 +40,17 @@ D:\Trabajo diario\IA 2\IA\obj\Debug\netcoreapp3.1\IA.csproj.CoreCompileInputs.ca
 D:\Trabajo diario\IA 2\IA\obj\Debug\netcoreapp3.1\IA.dll
 D:\Trabajo diario\IA 2\IA\obj\Debug\netcoreapp3.1\IA.pdb
 D:\Trabajo diario\IA 2\IA\obj\Debug\netcoreapp3.1\IA.genruntimeconfig.cache
+C:\IA-Minijuego\IA\IA\bin\Debug\netcoreapp3.1\IA.exe
+C:\IA-Minijuego\IA\IA\bin\Debug\netcoreapp3.1\IA.deps.json
+C:\IA-Minijuego\IA\IA\bin\Debug\netcoreapp3.1\IA.runtimeconfig.json
+C:\IA-Minijuego\IA\IA\bin\Debug\netcoreapp3.1\IA.runtimeconfig.dev.json
+C:\IA-Minijuego\IA\IA\bin\Debug\netcoreapp3.1\IA.dll
+C:\IA-Minijuego\IA\IA\bin\Debug\netcoreapp3.1\IA.pdb
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.csproj.AssemblyReference.cache
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.GeneratedMSBuildEditorConfig.editorconfig
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.AssemblyInfoInputs.cache
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.AssemblyInfo.cs
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.csproj.CoreCompileInputs.cache
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.dll
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.pdb
+C:\IA-Minijuego\IA\IA\obj\Debug\netcoreapp3.1\IA.genruntimeconfig.cache
