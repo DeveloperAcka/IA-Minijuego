@@ -438,36 +438,36 @@ namespace IA
         public carta[] cargarCartas()
         {
             //se comienza con la creación del stock de cartas con que se trabajará - total de 30 cartas
-            carta a1 = new carta("Bruja blanca", 800, 500, 1000);
-            carta a2 = new carta("Bruja azul", 700, 400, 3000);
-            carta a3 = new carta("Bruja roja", 200, 500, 5000);
-            carta a4 = new carta("Bruja celeste", 600, 400, 1000);
-            carta a5 = new carta("Bruja morada", 900, 200, 5000);
-            carta a6 = new carta("Bruja negra", 50, 5000, 1000);
-            carta a7 = new carta("Bruja rosada", 150, 4800, 1000);
-            carta a8 = new carta("Bruja gris", 300, 500, 1000);
-            carta a9 = new carta("Bruja escarlata", 850, 510, 1000);
-            carta a0 = new carta("Bruja verde", 450, 580, 1000);
-            carta b1 = new carta("Duende blanco", 125, 8000, 1000);
-            carta b2 = new carta("Duende azul", 200, 5000, 1000);
-            carta b3 = new carta("Duende rojo", 1250, 50, 1000);
-            carta b4 = new carta("Duende celeste", 80, 50, 1000);
-            carta b5 = new carta("Duende morado", 8, 5, 1000);
-            carta b6 = new carta("Duende negro", 8000, 5000, 1000);
-            carta b7 = new carta("Duende rosado", 777, 555, 1000);
-            carta b8 = new carta("Duende gris", 888, 111, 1000);
-            carta b9 = new carta("Duende escarlata", 800, 147, 1000);
-            carta b0 = new carta("Duende verde", 478, 525, 1000);
-            carta c1 = new carta("Dragon blanco", 278, 5000, 1000);
-            carta c2 = new carta("Dragon azul", 8000, 50, 1000);
-            carta c3 = new carta("Dragon rojo", 222, 502, 1000);
-            carta c4 = new carta("Dragon celeste", 1800, 1500, 1000);
-            carta c5 = new carta("Dragon morado", 2800, 2500, 1000);
-            carta c6 = new carta("Dragon negro", 3800, 3500, 1000);
-            carta c7 = new carta("Dragon rosado", 4800, 4500, 1000);
-            carta c8 = new carta("Dragon gris", 5800, 5500, 1000);
-            carta c9 = new carta("Dragon escarlata", 6800, 6500, 1000);
-            carta c0 = new carta("Dragon verde", 7800, 7500, 1000);
+            carta a1 = new carta(1, "Bruja blanca", "guerrero", 800, 500, 1000);
+            carta a2 = new carta(2, "Bruja azul", "magia", 700, 400, 3000);
+            carta a3 = new carta(3, "Bruja roja", "equipo", 200, 500, 5000);
+            carta a4 = new carta(4, "Bruja celeste", "diplomacia", 600, 400, 1000);
+            carta a5 = new carta(5, "Bruja morada", "guerrero", 900, 200, 5000);
+            carta a6 = new carta(6, "Bruja negra", "magia", 50, 5000, 1000);
+            carta a7 = new carta(7, "Bruja rosada", "equipo", 150, 4800, 1000);
+            carta a8 = new carta(8, "Bruja gris", "diplomacia", 300, 500, 1000);
+            carta a9 = new carta(9, "Bruja escarlata", "guerrero", 850, 510, 1000);
+            carta a0 = new carta(10, "Bruja verde", "magia", 450, 580, 1000);
+            carta b1 = new carta(11, "Duende blanco", "equipo", 125, 8000, 1000);
+            carta b2 = new carta(12, "Duende azul", "diplomacia", 200, 5000, 1000);
+            carta b3 = new carta(13, "Duende rojo", "guerrero", 1250, 50, 1000);
+            carta b4 = new carta(14, "Duende celeste", "magia", 80, 50, 1000);
+            carta b5 = new carta(15, "Duende morado", "equipo", 8, 5, 1000);
+            carta b6 = new carta(16, "Duende negro", "diplomacia", 8000, 5000, 1000);
+            carta b7 = new carta(17, "Duende rosado", "guerrero", 777, 555, 1000);
+            carta b8 = new carta(18, "Duende gris", "magia", 888, 111, 1000);
+            carta b9 = new carta(19, "Duende escarlata", "equipo", 800, 147, 1000);
+            carta b0 = new carta(20, "Duende verde", "diplomacia", 478, 525, 1000);
+            carta c1 = new carta(21, "Dragon blanco", "guerrero", 278, 5000, 1000);
+            carta c2 = new carta(22, "Dragon azul", "magia", 8000, 50, 1000);
+            carta c3 = new carta(23, "Dragon rojo", "equipo", 222, 502, 1000);
+            carta c4 = new carta(24, "Dragon celeste", "diplomacia", 1800, 1500, 1000);
+            carta c5 = new carta(25, "Dragon morado", "guerrero", 2800, 2500, 1000);
+            carta c6 = new carta(26, "Dragon negro", "magia", 3800, 3500, 1000);
+            carta c7 = new carta(27, "Dragon rosado", "equipo", 4800, 4500, 1000);
+            carta c8 = new carta(28, "Dragon gris", "diplomacia", 5800, 5500, 1000);
+            carta c9 = new carta(29, "Dragon escarlata", "guerrero", 6800, 6500, 1000);
+            carta c0 = new carta(30, "Dragon verde", "magia", 7800, 7500, 1000);
 
             //crear el array con las cartas y agregarlas
             carta[] stock = new carta[30];

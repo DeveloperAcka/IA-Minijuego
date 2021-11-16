@@ -8,15 +8,19 @@ namespace IA
     {
 
         //declaracion de parametros de la carta
+        private int id;
         private String nombre;
+        private String tipo;
         private int ataque;
         private int defensa;
         private int poderMinado;
 
         //constructor
-        public carta(String nombre, int ataque, int defensa, int poderMinado)
+        public carta(int id, String nombre, String tipo, int ataque, int defensa, int poderMinado)
         {
+            this.id = id;
             this.nombre = nombre;
+            this.tipo = tipo; 
             this.ataque = ataque;
             this.defensa = defensa;
             this.poderMinado = poderMinado;
