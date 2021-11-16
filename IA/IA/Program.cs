@@ -366,34 +366,45 @@ namespace IA
             carta[] usuario = new carta[10];
             usuario[0] = stock[0];
             usuario[1] = stock[1];
-            usuario[2] = stock[2];
-            usuario[3] = stock[13];
-            usuario[4] = stock[14];
-            usuario[5] = stock[15];
-            usuario[6] = stock[16];
-            usuario[7] = stock[17];
+            usuario[2] = stock[5];
+            usuario[3] = stock[9];
+            usuario[4] = stock[13];
+            usuario[5] = stock[17];
+            usuario[6] = stock[18];
+            usuario[7] = stock[20];
             usuario[8] = stock[22];
             usuario[9] = stock[23];
-
             return usuario;
         }
 
         //función para cargar el deck de la máquina
         public carta[] deckMaquina(carta[] stock)
         {
-
-            //randomicamente generamos el mazo de la maquina
-            var rnd = new Random();
-            var randomNumbers = Enumerable.Range(0, 29).OrderBy(x => rnd.Next()).Take(10).ToList();
-
-            //crear el mazo de la máquina
             carta[] maquina = new carta[10];
-            int i;
-            for (i = 0; i < 10; i++)
-            {
-                maquina[i] = stock[randomNumbers[i]];
-            }
+            bool aux = false;
 
+            while(aux==false)
+            {
+                //randomicamente generamos el mazo de la maquina
+                var rnd = new Random();
+                var randomNumbers = Enumerable.Range(0, 29).OrderBy(x => rnd.Next()).Take(10).ToList();
+
+                //crear el mazo de la máquina
+                int i;
+                for (i = 0; i < 10; i++)
+                {
+                    maquina[i] = stock[randomNumbers[i]];
+                }
+
+                int contador = 0;
+                //comprobar al menos 5 guerreros
+                foreach(carta card in maquina)
+                {
+                    if (card.getTipo() == "guerrero") contador = contador + 1;
+                }
+
+                if (contador >= 5) aux = true;
+            }
             return maquina;
         }
 
@@ -669,7 +680,7 @@ namespace IA
                 var randomNumber4 = Enumerable.Range(0, maquina.Length).OrderBy(x => rnd4.Next()).Take(1).ToList();
                 int mov = randomNumber4[0];
 
-                if (maquina[mov] != null)
+                if (maquina[mov] != null && maquina[mov].getTipo()=="guerrero")
                 {
                     selec = true;
                     movi = mov;
@@ -693,13 +704,13 @@ namespace IA
 
                 //seleccion de carta de respuesta
                 int mov = Convert.ToInt32(Console.ReadLine());
-                if (usuario[mov] != null)
+                if (usuario[mov] != null && usuario[mov].getTipo() == "guerrero")
                 {
                     selec = true;
                     movi = mov;
                 }
                 else
-                    Console.WriteLine("Escoja un numero de carta valido");
+                    Console.WriteLine("Escoja un numero de carta valido, asegúrese que sea un guerrero");
             }
             return movi;
         }
