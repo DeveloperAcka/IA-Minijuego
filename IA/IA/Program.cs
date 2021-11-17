@@ -754,122 +754,129 @@ namespace IA
         //función que aplica efectos adicionales al guerrero
         public carta[] adicionales(carta[] mazo, int puntero, String player, int opc)
         {
-            if(player=="MAQUINA") //si el jugador es la maquina, aplicación de la carta adicional
+
+            //se imprime la carta de guerrero inicial
+            Console.WriteLine("\n\n+"+player+" ha usado un guerrero ");
+            imprimirEleccionCarta(player, mazo[puntero]);
+
+            if(mazo.Length>0)
             {
-
-                //se imprime la carta de guerrero inicial
-                Console.WriteLine("\n\nLa máquina ha usado un guerrero ");
-                imprimirEleccionCarta("MAQUINA", mazo[puntero]);
-
-                bool mien = false;
-
-                while(mien == false)
-                {
-                    Random x = new Random();
-                    int resp = x.Next(mazo.Length);
-                    if (mazo[resp].getTipo() == "magia" || mazo[resp].getTipo() == "equipo") // si el randomico generado es magica o de equipo para aumentar mis stats
-                    {
-                        //se toma y se aplica esa carta
-                        Console.WriteLine("\n\nLa máquina ha usado una carta adicional de " + mazo[resp].getTipo());
-                        imprimirEleccionCarta("MAQUINA", mazo[resp]);
-                        //aplico a la seleccionada anteriormente -- la aplico de acuerdo a la opción
-                        switch (opc)
-                        {
-                            case 1:
-                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() + mazo[resp].getAtaque()); //aplico el aumento de stats
-                                break;
-                            case 2:
-                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() - mazo[resp].getAtaque()); //aplico la disminución de stats
-                                break;
-
-                            case 3:
-                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() + mazo[resp].getDefensa()); //aplico el aumento de stats
-                                break;
-
-                            case 4:
-                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() - mazo[resp].getDefensa()); //aplico la disminución de stats
-                                break;
-                        }
-                        //borro la aplicada
-                        mazo[resp] = null;
-                        mien = true;
-                    }
-                }
-
-                
-            }
-            else if(player == "USUARIO") //aplicación de cartas adicionales para el usuario //si el jugador es el usuario, se le listan las cartas y se aplica de la carta adicional
-            {
-                //se imprime la carta de guerrero inicial
-                Console.WriteLine("\n\nEl usuario ha usado un guerrero ");
-                imprimirEleccionCarta("USUARIO", mazo[puntero]);
-
-
-                Console.WriteLine("\n\nDesea el usuario agregar otra carta de estrategia? (si/no)");
-                String respu = Console.ReadLine();
-
-                while (respu == "si")
+                if (player == "MAQUINA") //si el jugador es la maquina, aplicación de la carta adicional
                 {
 
-                    //RESP LA OTRA CARTA ADICIONAL
-                    int resp;
-                    bool selec;
-                    selec = false;
+                    bool mien = false;
 
-
-                    int cont = 0;
-                    //imprimir el mazo del usuario
-                    Console.WriteLine("\n\nEscoja una carta  : ");
-                    imprimirMazo(mazo, "USUARIO");
-
-                    //seleccion de carta de respuesta
-                    resp = Convert.ToInt32(Console.ReadLine());
-
-
-
-
-
-
-
-                    if (mazo[resp].getTipo() == "magia" || mazo[resp].getTipo() == "equipo") // si el randomico generado es magica o de equipo para aumentar mis stats
+                    while (mien == false)
                     {
-                        //se toma y se aplica esa carta
-                        Console.WriteLine("\n\nEl usuario ha usado una carta adicional de " + mazo[resp].getTipo());
-                        imprimirEleccionCarta("USUARIO", mazo[resp]);
-                        //aplico a la seleccionada anteriormente -- la aplico de acuerdo a la opción
-                        switch (opc)
+                        Random x = new Random();
+                        int resp = x.Next(mazo.Length);
+                        if (mazo[resp].getTipo() == "magia" || mazo[resp].getTipo() == "equipo") // si el randomico generado es magica o de equipo para aumentar mis stats
                         {
-                            case 1:
-                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() + mazo[resp].getAtaque()); //aplico el aumento de stats
-                                break;
-                            case 2:
-                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() - mazo[resp].getAtaque()); //aplico la disminución de stats
-                                break;
+                            //se toma y se aplica esa carta
+                            Console.WriteLine("\n\nLa máquina ha usado una carta adicional de " + mazo[resp].getTipo());
+                            imprimirEleccionCarta("MAQUINA", mazo[resp]);
+                            //aplico a la seleccionada anteriormente -- la aplico de acuerdo a la opción
+                            switch (opc)
+                            {
+                                case 1:
+                                    mazo[puntero].setAtaque(mazo[puntero].getAtaque() + mazo[resp].getAtaque()); //aplico el aumento de stats
+                                    break;
+                                case 2:
+                                    mazo[puntero].setAtaque(mazo[puntero].getAtaque() - mazo[resp].getAtaque()); //aplico la disminución de stats
+                                    break;
 
-                            case 3:
-                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() + mazo[resp].getDefensa()); //aplico el aumento de stats
-                                break;
+                                case 3:
+                                    mazo[puntero].setDefensa(mazo[puntero].getDefensa() + mazo[resp].getDefensa()); //aplico el aumento de stats
+                                    break;
 
-                            case 4:
-                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() - mazo[resp].getDefensa()); //aplico la disminución de stats
-                                break;
+                                case 4:
+                                    mazo[puntero].setDefensa(mazo[puntero].getDefensa() - mazo[resp].getDefensa()); //aplico la disminución de stats
+                                    break;
+                            }
+                            //borro la aplicada
+                            mazo[resp] = null;
+                            mien = true;
                         }
-                        //borro la aplicada
-                        mazo[resp] = null;
-       
-                    }
-                    else
-                    {
-                        Console.WriteLine("Escoja una carta válida");
-                        Console.ReadLine();
                     }
 
 
-                    Console.WriteLine("\n\nDesea el agregar otra carta de estrategia? (si/no)");
-                    respu = Console.ReadLine();
                 }
+                else if (player == "USUARIO") //aplicación de cartas adicionales para el usuario //si el jugador es el usuario, se le listan las cartas y se aplica de la carta adicional
+                {
 
+                    Console.WriteLine("\n\nDesea el usuario agregar otra carta de estrategia? (si/no)");
+                    String respu = Console.ReadLine();
+
+                    while (respu == "si")
+                    {
+
+                        //RESP LA OTRA CARTA ADICIONAL
+                        int resp;
+                        bool selec;
+                        selec = false;
+
+
+                        int cont = 0;
+                        //imprimir el mazo del usuario
+                        Console.WriteLine("\n\nEscoja una carta  : ");
+                        imprimirMazo(mazo, "USUARIO");
+
+                        //seleccion de carta de respuesta
+                        resp = Convert.ToInt32(Console.ReadLine());
+
+
+
+
+
+
+
+                        if (mazo[resp].getTipo() == "magia" || mazo[resp].getTipo() == "equipo") // si el randomico generado es magica o de equipo para aumentar mis stats
+                        {
+                            //se toma y se aplica esa carta
+                            Console.WriteLine("\n\nEl usuario ha usado una carta adicional de " + mazo[resp].getTipo());
+                            imprimirEleccionCarta("USUARIO", mazo[resp]);
+                            //aplico a la seleccionada anteriormente -- la aplico de acuerdo a la opción
+                            switch (opc)
+                            {
+                                case 1:
+                                    mazo[puntero].setAtaque(mazo[puntero].getAtaque() + mazo[resp].getAtaque()); //aplico el aumento de stats
+                                    break;
+                                case 2:
+                                    mazo[puntero].setAtaque(mazo[puntero].getAtaque() - mazo[resp].getAtaque()); //aplico la disminución de stats
+                                    break;
+
+                                case 3:
+                                    mazo[puntero].setDefensa(mazo[puntero].getDefensa() + mazo[resp].getDefensa()); //aplico el aumento de stats
+                                    break;
+
+                                case 4:
+                                    mazo[puntero].setDefensa(mazo[puntero].getDefensa() - mazo[resp].getDefensa()); //aplico la disminución de stats
+                                    break;
+                            }
+                            //borro la aplicada
+                            mazo[resp] = null;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Escoja una carta válida");
+                            Console.ReadLine();
+                        }
+
+
+                        Console.WriteLine("\n\nDesea el agregar otra carta de estrategia? (si/no)");
+                        respu = Console.ReadLine();
+                    }
+
+                }
             }
+            else
+            {
+                Console.WriteLine("\n\nNo hay cartas de estrategia para aplicar");
+                Console.ReadLine();
+            }
+
+            
 
             return mazo;
         }
