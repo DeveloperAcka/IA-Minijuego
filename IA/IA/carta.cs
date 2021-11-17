@@ -27,6 +27,14 @@ namespace IA
 
         }
 
+        //GETS*****************************************************************************************************************************************************************************
+
+        //get del id
+        public int setId()
+        {
+            return this.id;
+        }
+
         //get del campo nombre
         public String getNombre()
         {
@@ -56,5 +64,20 @@ namespace IA
         {
             return this.poderMinado;
         }
+
+        //SETS*****************************************************************************************************************************************************************************
+
+        //set del campo ataque
+        public void setAtaque(int ataque)
+        {
+            this.ataque = ataque;
+        }
+
+        //set del campo defensa
+        public void setDefensa(int defensa)
+        {
+            this.defensa = defensa;
+        }
+
     }
 }

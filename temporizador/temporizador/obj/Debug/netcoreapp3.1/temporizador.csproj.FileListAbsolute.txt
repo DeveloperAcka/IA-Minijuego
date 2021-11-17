@@ -1,0 +1,14 @@
+C:\IA-Minijuego\temporizador\temporizador\bin\Debug\netcoreapp3.1\temporizador.exe
+C:\IA-Minijuego\temporizador\temporizador\bin\Debug\netcoreapp3.1\temporizador.deps.json
+C:\IA-Minijuego\temporizador\temporizador\bin\Debug\netcoreapp3.1\temporizador.runtimeconfig.json
+C:\IA-Minijuego\temporizador\temporizador\bin\Debug\netcoreapp3.1\temporizador.runtimeconfig.dev.json
+C:\IA-Minijuego\temporizador\temporizador\bin\Debug\netcoreapp3.1\temporizador.dll
+C:\IA-Minijuego\temporizador\temporizador\bin\Debug\netcoreapp3.1\temporizador.pdb
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.csproj.AssemblyReference.cache
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.GeneratedMSBuildEditorConfig.editorconfig
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.AssemblyInfoInputs.cache
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.AssemblyInfo.cs
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.csproj.CoreCompileInputs.cache
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.dll
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.pdb
+C:\IA-Minijuego\temporizador\temporizador\obj\Debug\netcoreapp3.1\temporizador.genruntimeconfig.cache

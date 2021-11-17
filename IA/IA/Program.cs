@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,7 +93,8 @@ namespace IA
                         int opc = generarPropuestaMaquina(); //selecciona cuál es el criterio de victoria de la ronda
                         imprimirElección("MAQUINA", opc);
                         int movi = seleccionarCartaMaquina(maquina);
-                        imprimirEleccionCarta("MAQUINA", maquina[movi]);
+                        maquina = adicionales(maquina, movi, "MAQUINA", opc); //función para aplicar adicionales
+                        imprimirEleccionCarta("MAQUINA", maquina[movi]); //IMPRESIÓN DE LA CARTA FINAL FINAL A JUGAR
 
                         //guardo en un objeto llamado seleccion usuario, el objeto antes de borrarlo para compararlo
                         carta SelMa = maquina[movi];
@@ -108,6 +110,7 @@ namespace IA
                         Console.WriteLine("\nTURNO DEL USUARIO");
                         Console.ReadKey();
                         movi = seleccionarCartaUsuario(usuario);
+                        usuario = adicionales(usuario, movi, "USUARIO", opc);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardo en un objeto llamado seleccion usuario, el objeto antes de borrarlo para compararlo
@@ -136,6 +139,7 @@ namespace IA
                         imprimirElección("USUARIO", opc);
                         int movi = 0;
                         movi = seleccionarCartaUsuario(usuario);
+                        usuario = adicionales(usuario, movi, "USUARIO", opc);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardo en un objeto llamado seleccion usuario, el objeto antes de borrarlo para compararlo
@@ -152,6 +156,7 @@ namespace IA
                         Console.ReadKey();
                         bool selec = false;
                         movi = seleccionarCartaMaquina(maquina);
+                        maquina = adicionales(maquina, movi, "MAQUINA", opc); //función para aplicar adicionales
                         imprimirEleccionCarta("MAQUINA", maquina[movi]);
 
                         //guardo en un objeto llamado seleccion de la maquina, el objeto antes de borrarlo para compararlo
@@ -189,6 +194,7 @@ namespace IA
                         int opc = generarPropuestaMaquina(); //selecciona cuál es el criterio de victoria de la ronda
                         imprimirElección("MAQUINA", opc);
                         int movi = seleccionarCartaMaquina(maquina);
+                        maquina = adicionales(maquina, movi, "MAQUINA", opc); //función para aplicar adicionales
                         imprimirEleccionCarta("MAQUINA", maquina[movi]);
 
                         //guardar el objeto antes de eliminarlo
@@ -205,6 +211,7 @@ namespace IA
                         Console.WriteLine("\nTURNO DEL USUARIO");
                         bool selec = false;
                         movi = seleccionarCartaUsuario(usuario);
+                        usuario = adicionales(usuario, movi, "USUARIO", opc);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardar el objeto antes de eliminarlo
@@ -234,6 +241,7 @@ namespace IA
                         bool selec = false;
                         int movi = 0;
                         movi = seleccionarCartaUsuario(usuario);
+                        usuario = adicionales(usuario, movi, "USUARIO", opc);
                         imprimirEleccionCarta("USUARIO", usuario[movi]);
 
                         //guardamos la carta antes de eliminarla
@@ -251,6 +259,7 @@ namespace IA
                         Console.ReadKey();
                         selec = false;
                         movi = seleccionarCartaMaquina(maquina);
+                        maquina = adicionales(maquina, movi, "MAQUINA", opc); //función para aplicar adicionales
                         imprimirEleccionCarta("MAQUINA", maquina[movi]);
 
                         //guardo en un objeto llamado seleccion de la maquina, el objeto antes de borrarlo para compararlo
@@ -403,7 +412,7 @@ namespace IA
                     if (card.getTipo() == "guerrero") contador = contador + 1;
                 }
 
-                if (contador >= 5) aux = true;
+                if (contador == 5) aux = true;
             }
             return maquina;
         }
@@ -454,7 +463,7 @@ namespace IA
                 Console.WriteLine("Cayó sello");
                 if (deseoJugador == "cara")
                 {
-                    Console.WriteLine("Por lo tanto, el primer turno es de la maquina");
+                    Console.WriteLine("\n\nPor lo tanto, el primer turno es de la maquina");
                     primerJugador = "maquina";
                     segundoJugador = "usuario";
                 }
@@ -475,7 +484,7 @@ namespace IA
             return posiciones;
 
         }
-
+            
         //funcion que imprime de quién es la entrada
         public void imprimirEntrada(String player)
         {
@@ -629,9 +638,11 @@ namespace IA
         //función que imprime la carta seleccionada
         public void imprimirEleccionCarta(String player, carta obj)
         {
-            Console.WriteLine(player + " ha elegido la carta: ");
+            Console.WriteLine("\n\n" + player + " ha elegido la carta: ");
             Console.WriteLine("Nombre de carta: ");
             Console.WriteLine(obj.getNombre());
+            Console.WriteLine("Tipo: ");
+            Console.WriteLine(obj.getTipo());
             Console.WriteLine("Ataque: ");
             Console.WriteLine(obj.getAtaque());
             Console.WriteLine("Defensa: ");
@@ -739,6 +750,130 @@ namespace IA
 
             
         }
+
+        //función que aplica efectos adicionales al guerrero
+        public carta[] adicionales(carta[] mazo, int puntero, String player, int opc)
+        {
+            if(player=="MAQUINA") //si el jugador es la maquina, aplicación de la carta adicional
+            {
+
+                //se imprime la carta de guerrero inicial
+                Console.WriteLine("\n\nLa máquina ha usado un guerrero ");
+                imprimirEleccionCarta("MAQUINA", mazo[puntero]);
+
+                bool mien = false;
+
+                while(mien == false)
+                {
+                    Random x = new Random();
+                    int resp = x.Next(mazo.Length);
+                    if (mazo[resp].getTipo() == "magia" || mazo[resp].getTipo() == "equipo") // si el randomico generado es magica o de equipo para aumentar mis stats
+                    {
+                        //se toma y se aplica esa carta
+                        Console.WriteLine("\n\nLa máquina ha usado una carta adicional de " + mazo[resp].getTipo());
+                        imprimirEleccionCarta("MAQUINA", mazo[resp]);
+                        //aplico a la seleccionada anteriormente -- la aplico de acuerdo a la opción
+                        switch (opc)
+                        {
+                            case 1:
+                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() + mazo[resp].getAtaque()); //aplico el aumento de stats
+                                break;
+                            case 2:
+                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() - mazo[resp].getAtaque()); //aplico la disminución de stats
+                                break;
+
+                            case 3:
+                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() + mazo[resp].getDefensa()); //aplico el aumento de stats
+                                break;
+
+                            case 4:
+                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() - mazo[resp].getDefensa()); //aplico la disminución de stats
+                                break;
+                        }
+                        //borro la aplicada
+                        mazo[resp] = null;
+                        mien = true;
+                    }
+                }
+
+                
+            }
+            else if(player == "USUARIO") //aplicación de cartas adicionales para el usuario //si el jugador es el usuario, se le listan las cartas y se aplica de la carta adicional
+            {
+                //se imprime la carta de guerrero inicial
+                Console.WriteLine("\n\nEl usuario ha usado un guerrero ");
+                imprimirEleccionCarta("USUARIO", mazo[puntero]);
+
+
+                Console.WriteLine("\n\nDesea el usuario agregar otra carta de estrategia? (si/no)");
+                String respu = Console.ReadLine();
+
+                while (respu == "si")
+                {
+
+                    //RESP LA OTRA CARTA ADICIONAL
+                    int resp;
+                    bool selec;
+                    selec = false;
+
+
+                    int cont = 0;
+                    //imprimir el mazo del usuario
+                    Console.WriteLine("\n\nEscoja una carta  : ");
+                    imprimirMazo(mazo, "USUARIO");
+
+                    //seleccion de carta de respuesta
+                    resp = Convert.ToInt32(Console.ReadLine());
+
+
+
+
+
+
+
+                    if (mazo[resp].getTipo() == "magia" || mazo[resp].getTipo() == "equipo") // si el randomico generado es magica o de equipo para aumentar mis stats
+                    {
+                        //se toma y se aplica esa carta
+                        Console.WriteLine("\n\nEl usuario ha usado una carta adicional de " + mazo[resp].getTipo());
+                        imprimirEleccionCarta("USUARIO", mazo[resp]);
+                        //aplico a la seleccionada anteriormente -- la aplico de acuerdo a la opción
+                        switch (opc)
+                        {
+                            case 1:
+                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() + mazo[resp].getAtaque()); //aplico el aumento de stats
+                                break;
+                            case 2:
+                                mazo[puntero].setAtaque(mazo[puntero].getAtaque() - mazo[resp].getAtaque()); //aplico la disminución de stats
+                                break;
+
+                            case 3:
+                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() + mazo[resp].getDefensa()); //aplico el aumento de stats
+                                break;
+
+                            case 4:
+                                mazo[puntero].setDefensa(mazo[puntero].getDefensa() - mazo[resp].getDefensa()); //aplico la disminución de stats
+                                break;
+                        }
+                        //borro la aplicada
+                        mazo[resp] = null;
+       
+                    }
+                    else
+                    {
+                        Console.WriteLine("Escoja una carta válida");
+                        Console.ReadLine();
+                    }
+
+
+                    Console.WriteLine("\n\nDesea el agregar otra carta de estrategia? (si/no)");
+                    respu = Console.ReadLine();
+                }
+
+            }
+
+            return mazo;
+        }
+
 
     }
 }
